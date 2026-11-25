@@ -1,11 +1,11 @@
-# SVT for TypeScript
+# SVT for JavaScript
 
 Inspect named inputs in SVG templates and replace text, paint, or images while preserving the
 surrounding artwork. SVG owns geometry and layout; SVT supplies literal values without evaluating
 CSS, loading resources, or rendering the document.
 
 ```ts
-import { inspect } from "svt-typescript";
+import { inspect } from "@svt-project/svt-js";
 
 const inspection = inspect(xmlText); // string or UTF-8 Uint8Array
 if (!inspection.ok) {
@@ -43,7 +43,8 @@ separate follow-up. The accepted reference snapshot identifies a reviewed, unpub
 candidate; it does not rename an earlier publication. See [provenance](conformance/SNAPSHOT.json).
 
 Build a source checkout with `npm ci --ignore-scripts` and `npm run build`. The package has ESM exports and generated
-TypeScript declarations, and remains private while npm naming and publication are decided. No
+TypeScript declarations. Its npm identity is `@svt-project/svt-js`; publication remains a separate
+step and the package is private. No
 package or specification release is implied by this repository.
 
 Repository-authored material is MIT-licensed; see [LICENSE](LICENSE) and [NOTICE](NOTICE).

@@ -1,4 +1,4 @@
-# TypeScript API and processing policy
+# JavaScript API and processing policy
 
 The core provides synchronous inspection and binding with whole-template rejection and typed
 results. Hosts own Worker execution. Resource limits are documented separately in
@@ -9,7 +9,7 @@ candidate; see [snapshot provenance](../conformance/SNAPSHOT.json).
 
 Use the scoped `@xmldom/xmldom` package, initially pinned to the tested 0.9.12. Keep parser classes
 private. Support browser main thread, dedicated Workers and Node with the same core. No React,
-network, filesystem, renderer, automatic Worker scheduling or second CLI in core. Npm identity and publication remain separate decisions.
+network, filesystem, renderer, automatic Worker scheduling or second CLI in core. The npm identity is `@svt-project/svt-js`; publication remains a separate decision.
 
 The core implements inspection, presentation metadata and atomic binding. Optional authored paint/image
 interpretation is a separate API and acceptance milestone, not part of inspection or binding. Do
@@ -109,6 +109,11 @@ Recognized invalid metadata is distinct from valid foreign/explicitly ignored co
 reject unknown SVG elements, unfamiliar paint/reference strings or permitted opaque metadata just
 because they are unfamiliar. The normal parser remains responsible for malformed XML reporting;
 we are not implementing an independent XML validator.
+
+Use xmldom's error-level stop policy: reported errors and fatal errors fail inspection; warnings
+alone do not. A warning may describe valid content, such as a literal Unicode replacement character
+(U+FFFD). Warning-only handling of malformed XML belongs to the parser and is not a portability or
+recovery guarantee. UTF-8 byte decoding remains fatal on invalid byte sequences.
 
 Invalid options, wrong runtime argument shapes and programmer misuse throw TypeError/RangeError.
 Do not catch arbitrary defects or allocation failures and label them malformed user input.

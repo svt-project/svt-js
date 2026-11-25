@@ -1,5 +1,5 @@
 {
-  "name": "svt-typescript",
+  "name": "@svt-project/svt-js",
   "version": "0.1.0-dev.0",
   "private": true,
   "type": "module",
@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/svt-project/svt-typescript.git"
+    "url": "https://github.com/svt-project/svt-js.git"
   },
   "exports": {
     ".": {

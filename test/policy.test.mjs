@@ -6,6 +6,11 @@ import {
   defaultBindingLimits,
 } from "../dist/index.js";
 import { svg, success, semantics, SVT, RDF } from "./support.mjs";
+import { replacementCharacter } from "./xml-preservation.mjs";
+test(
+  "valid U+FFFD survives inspection and binding without hiding XML errors",
+  replacementCharacter,
+);
 const rejects = (r, code) => {
   assert.equal(r.ok, false);
   assert.equal(r.error.code, code);
