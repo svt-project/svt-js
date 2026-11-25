@@ -1,4 +1,4 @@
-import type { Document, Element } from "@xmldom/xmldom";
+import type { Document, Element, Node } from "@xmldom/xmldom";
 import type { Binding, BindingOptions, BoundSvg, Result } from "./model.js";
 import type { Inventory, InternalInput } from "./inventory.js";
 import { artwork } from "./inventory.js";
@@ -152,10 +152,15 @@ export function bind(
       }
     const sourceRoot = captured.documentElement;
     if (!sourceRoot) throw new Error("Captured document has no root.");
+    const textValues = new Map<Node, string>();
     let index = 0;
     for (const element of artwork(sourceRoot)) {
-      for (const operation of operations.get(index++) ?? [])
-        if (
+      for (const operation of operations.get(index++) ?? []) {
+        if (operation.hook === "text") {
+          const value = operation.prepared.value;
+          if (typeof value !== "string") throw new Error("Unprepared text.");
+          textValues.set(element, value);
+        } else if (
           operation.hook === "image" &&
           element.hasAttributeNS(XLINK, "href")
         ) {
@@ -172,12 +177,12 @@ export function bind(
             "maxOutputBytes",
           );
         }
+      }
     }
     for (const p of prepared)
       if (typeof p.value !== "string")
         p.value = "data:" + p.mediaType + ";base64," + base64(p.value.slice());
-    // cloneNode(true) preserves Document kind; only private captured Document values reach here.
-    const doc = captured.cloneNode(true) as Document;
+    const doc = cloneWithText(captured, textValues);
     const root = doc.documentElement;
     if (!root) throw new Error("Cloned document has no root.");
     index = 0;
@@ -185,27 +190,66 @@ export function bind(
       for (const operation of operations.get(index++) ?? []) {
         const value = operation.prepared.value;
         if (typeof value !== "string") throw new Error("Unprepared binding.");
-        replace(doc, element, operation.hook, value);
+        if (operation.hook !== "text") replace(element, operation.hook, value);
       }
     const svg = serialize(doc);
     limit(utf8Length(svg), limits.maxOutputBytes, "maxOutputBytes");
     return Object.freeze({ svg, toUtf8: () => new TextEncoder().encode(svg) });
   });
 }
-function replace(
+/** Copy children once: repeated removeChild calls reindex wide text targets quadratically. */
+function cloneWithText(
+  captured: Document,
+  replacements: ReadonlyMap<Node, string>,
+): Document {
+  const doc = captured.implementation.createDocument(null, "", null);
+  const stack: { target: Node; next: Node | null }[] = [
+    { target: doc, next: captured.firstChild },
+  ];
+  while (stack.length) {
+    const frame = stack[stack.length - 1];
+    if (!frame) break;
+    const child = frame.next;
+    if (!child) {
+      stack.pop();
+      continue;
+    }
+    frame.next = child.nextSibling;
+    const copy = doc.importNode(child, false);
+    frame.target.appendChild(copy);
+    const replacement = replacements.get(child);
+    if (replacement !== undefined)
+      copyTextChildren(doc, child, copy, replacement);
+    else if (child.firstChild)
+      stack.push({ target: copy, next: child.firstChild });
+  }
+  return doc;
+}
+
+/** Text targets admit character data, comments and processing instructions. */
+function copyTextChildren(
   doc: Document,
-  element: Element,
-  hook: string,
+  source: Node,
+  target: Node,
   value: string,
 ): void {
-  if (hook === "text") {
-    const characters = [...children(element)].filter(
-      (c) => c.nodeType === 3 || c.nodeType === 4,
-    );
-    if (value)
-      element.insertBefore(doc.createTextNode(value), characters[0] ?? null);
-    for (const c of characters) element.removeChild(c);
-  } else if (hook === "image") {
+  const replacement = value ? doc.createTextNode(value) : null;
+  for (const child of children(source)) {
+    if (child.nodeType === 3 || child.nodeType === 4) {
+      if (replacement && !replacement.parentNode)
+        target.appendChild(replacement);
+    } else {
+      target.appendChild(doc.importNode(child, true));
+    }
+  }
+  if (replacement && !replacement.parentNode) target.appendChild(replacement);
+}
+function replace(
+  element: Element,
+  hook: "image" | "fill" | "stroke",
+  value: string,
+): void {
+  if (hook === "image") {
     element.setAttribute("href", value);
     const xlink = element.getAttributeNodeNS(XLINK, "href");
     if (xlink) element.setAttributeNS(XLINK, xlink.name, value);
