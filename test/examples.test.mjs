@@ -98,6 +98,54 @@ test("example reloads after a rejected initial inspection", (t) => {
   assert.equal(workers[1].messages[0].source, "template XML");
 });
 
+test("Worker failure discards stale work and reloads only the newest pending state", (t) => {
+  const { controller, workers, results, errors } = harness(t);
+  controller.update(values("active"));
+  controller.update(values("discarded"));
+  controller.update(values("latest"));
+  let prevented = false;
+  workers[0].onerror({
+    message: "failed",
+    preventDefault() {
+      prevented = true;
+    },
+  });
+  assert.equal(prevented, true);
+  assert.equal(workers[0].terminated, true);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(results, []);
+  assert.equal(workers[1].messages[0].source, "template XML");
+  assert.equal(workers[1].messages[0].bindings[0].value, "latest");
+  assert.equal(workers[1].messages.length, 1);
+  const latest = workers[1].messages[0].id;
+  workers[1].reply(latest);
+  assert.deepEqual(
+    results.map((result) => result.id),
+    [latest],
+  );
+  assert.equal(workers[1].messages.length, 1);
+});
+
+test("Worker response transfer failure is a host error and permits retry", (t) => {
+  const { controller, workers, results, errors } = harness(t);
+  controller.update([]);
+  workers[0].onmessageerror();
+  assert.equal(workers[0].terminated, true);
+  assert.equal(errors[0].kind, "worker");
+  assert.equal(errors.length, 1);
+  assert.deepEqual(results, []);
+  controller.update(values("retry"));
+  const retry = workers[1].messages[0];
+  assert.equal(retry.source, "template XML");
+  assert.deepEqual(retry.bindings, values("retry"));
+  workers[1].reply(retry.id);
+  assert.deepEqual(
+    results.map((result) => result.id),
+    [retry.id],
+  );
+  assert.equal(errors.length, 1);
+});
+
 test("example disposal releases the Worker and refuses further updates", (t) => {
   const { controller, workers } = harness(t);
   controller.update([]);
