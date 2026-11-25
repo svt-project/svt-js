@@ -9,7 +9,7 @@
 - Discuss changes to public API, dependencies, format or ownership before implementation.
 - Keep specification rules authoritative in svt-spec. Adopt stamped copies explicitly;
   do not fetch live canonical assets during builds. Optional interpretation is separate.
-- Preserve MIT licensing, Bathos attribution and dependency notices.
+- Preserve MIT licensing, attribution to Bathos Pty Ltd and dependency notices.
 - Preserve strict TypeScript analysis, including dependency declarations. Narrow external values;
   never suppress errors just to obtain a build. Test input and ownership boundaries.
 - Run npm run check after changes; use npm run test:browser for relevant runtime changes.
