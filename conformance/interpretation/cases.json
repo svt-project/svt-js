@@ -1,0 +1,1702 @@
+{
+  "format_version": 0,
+  "cases": [
+    {
+      "raw": null,
+      "hook": "fill",
+      "kind": "Absent",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": " ",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "nonsense",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "#12",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "#12345",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "#1234567",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "#123456789",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "#ggg",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1. 2 3)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1,2 3)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1 2,3)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1%,2,3)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1 2)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1 2 3 4)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1 2 3, .5)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgba(1,2,3/.5)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1 2 3 /)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1 2 3) red",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb (1 2 3)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1 2 3 / none)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(none 0 0)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1e309 0 0)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(NaN 0 0)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(Infinity 0 0)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(١ 0 0)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1 2 3 / 5 %)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(0 100 50)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(0% 100% 50%)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(1px 100% 50%)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(0, 100%, 50% / .5)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "hwb(0 0% 0%)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "color(display-p3 1 0 0)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "color(srgb 1 0 0)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "lab(50 10 10)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(from red r g b)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(calc(1 + 2) 0 0)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "r\\65 d",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "red/*comment*/",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1/**/2 3)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "notvar(--x)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1var(--x) 0 0)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(x)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x garbage)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x))",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x) red",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x) var(--y)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--é)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x, (red))",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x,[red])",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x,red;blue)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x, var(bad))",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x, \"unterminated)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x, \"back\\slash\")",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url()",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(\"\")",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo bar)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo(bar))",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo)red",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo) red blue",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo) inherit",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo) url(bar)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo) color(display-p3 1 0 0)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo%XX)",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(\"space here\")",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "\"var(--x)\"",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": " red",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "RED ",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "#123",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0.06666666666666667,
+        0.13333333333333333,
+        0.2,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "#1234",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0.06666666666666667,
+        0.13333333333333333,
+        0.2,
+        0.26666666666666666
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "#123456",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0.07058823529411765,
+        0.20392156862745098,
+        0.33725490196078434,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "#12345678",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0.07058823529411765,
+        0.20392156862745098,
+        0.33725490196078434,
+        0.47058823529411764
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "transparent",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "RGB(300 -10 0 / 150%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgba(1,2,3)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0.00392156862745098,
+        0.00784313725490196,
+        0.011764705882352941,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1,2,3,25%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0.00392156862745098,
+        0.00784313725490196,
+        0.011764705882352941,
+        0.25
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgba(100%,0%,0%,.5)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        1,
+        0,
+        0,
+        0.5
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(50% 127.5 0 / .125)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0.5,
+        0.5,
+        0,
+        0.125
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(+.5e2 0 0)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0.19607843137254902,
+        0,
+        0,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(-0 0 -0 / -0)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1e-999 0 0)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(1e308 0 0)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(120 100% 50%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "HSLA(-240DEG,100%,50%,50%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0,
+        1,
+        0,
+        0.5
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(.5turn 100% 50%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(200grad 100% 50%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(3.141592653589793rad 100% 50%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(99999999 0% 25%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0.25,
+        0.25,
+        0.25,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(0 200% 50% / -1)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(0 -10% 200%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(360 100% 50%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": " \tReD\n",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "none",
+      "hook": "fill",
+      "kind": "NoPaint",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": " NONE ",
+      "hook": "fill",
+      "kind": "NoPaint",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "currentColor",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "inherit",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "initial",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "unset",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "revert",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "revert-layer",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "context-fill",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "context-stroke",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "CanvasText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "WindowText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "AccentColor",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x)",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "VAR( --x )",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x,)",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x,red)",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x, var(--fallback, red))",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "rgb(var(--red) 0 0)",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "calc(var(--x) + 1)",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x, \"(notvar(--y))\")",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "var(--x, url(\"var(--z)\"))",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(#g)",
+      "hook": "fill",
+      "kind": "ResourceReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "URL( \"#g\" )",
+      "hook": "fill",
+      "kind": "ResourceReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo) red",
+      "hook": "fill",
+      "kind": "ResourceReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo) none",
+      "hook": "fill",
+      "kind": "ResourceReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo) currentColor",
+      "hook": "fill",
+      "kind": "ResourceReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(foo) var(--x)",
+      "hook": "fill",
+      "kind": "ResourceReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url(\"var(--x)\")",
+      "hook": "fill",
+      "kind": "ResourceReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "url('a\"b')",
+      "hook": "fill",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": null,
+      "hook": "image",
+      "kind": "Absent",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "",
+      "hook": "image",
+      "kind": "Empty",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "#",
+      "hook": "image",
+      "kind": "FragmentReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "#part",
+      "hook": "image",
+      "kind": "FragmentReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "../a%20b.png",
+      "hook": "image",
+      "kind": "RelativeReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "//example.test/a",
+      "hook": "image",
+      "kind": "RelativeReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "/a",
+      "hook": "image",
+      "kind": "RelativeReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "?a:b",
+      "hook": "image",
+      "kind": "RelativeReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "https://",
+      "hook": "image",
+      "kind": "AbsoluteReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "custom+x:a",
+      "hook": "image",
+      "kind": "AbsoluteReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "C:/image.png",
+      "hook": "image",
+      "kind": "AbsoluteReference",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:,not validated",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "DATA:IMAGE/PNG;base64,not base64",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/png"
+    },
+    {
+      "raw": "data:;charset=UTF-8,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/x%23%5E;flag=a%3Bb;base64,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/x%23%5e"
+    },
+    {
+      "raw": "data:text/plain;name=a;name=b,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "text/plain"
+    },
+    {
+      "raw": "data:application/json;base64=x,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "application/json"
+    },
+    {
+      "raw": " ",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": " x",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "x ",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "a\\b",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "é.png",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "a%ZZ",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "a%",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": ":x",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "1:a",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/png",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:/png,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image%2Fpng,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/png;unknown,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/png;base64;base64,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/png;base64;foo=x,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/png;foo=,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/png;=x,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/png;foo='x',",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/png;foo=\"x\",",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/x#,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/x^,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/x^"
+    },
+    {
+      "raw": "data:image/x%2F,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/x%2f"
+    },
+    {
+      "raw": "data:image/png;,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/png;foo=a#b,",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "AccentColorText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ActiveBorder",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ActiveCaption",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ActiveText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "AppWorkspace",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "Background",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ButtonBorder",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ButtonFace",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ButtonHighlight",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ButtonShadow",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ButtonText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "Canvas",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "CaptionText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "Field",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "FieldText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "GrayText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "Highlight",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "HighlightText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "InactiveBorder",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "InactiveCaption",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "InactiveCaptionText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "InfoBackground",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "InfoText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "LinkText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "Mark",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "MarkText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "Menu",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "MenuText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "Scrollbar",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "SelectedItem",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "SelectedItemText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ThreeDDarkShadow",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ThreeDFace",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ThreeDHighlight",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ThreeDLightShadow",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "ThreeDShadow",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "VisitedText",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "Window",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "WindowFrame",
+      "hook": "fill",
+      "kind": "RequiresContext",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(60 100% 50%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(240 100% 50%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(300 100% 50%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(330 100% 25%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0.5,
+        0,
+        0.25,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(420 100% 50%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "hsl(0 100% -1%)",
+      "hook": "fill",
+      "kind": "Literal",
+      "color": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/svg+xml;base64,invalid",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/svg+xml"
+    },
+    {
+      "raw": "data:IMAGE/SVG%2BXML;base64,invalid",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/svg%2bxml"
+    },
+    {
+      "raw": "data:im%61ge/svg+xml,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "im%61ge/svg+xml"
+    },
+    {
+      "raw": "data:image/svg%,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/svg%"
+    },
+    {
+      "raw": "data:image/svg%ZZxml,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/svg%zzxml"
+    },
+    {
+      "raw": "data:image/x!$&^_.+-,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/x!$&^_.+-"
+    },
+    {
+      "raw": "data:image/png#fragment,ignored",
+      "hook": "image",
+      "kind": "UnsupportedOrUnrecognized",
+      "color": null,
+      "declared_media_type": null
+    },
+    {
+      "raw": "data:image/png;base64,ignored#fragment",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/png"
+    },
+    {
+      "raw": "data:image/png;na%6De=value,",
+      "hook": "image",
+      "kind": "DataUri",
+      "color": null,
+      "declared_media_type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "svt-typescript",
+  "version": "0.1.0-dev.0",
+  "private": true,
+  "type": "module",
+  "description": "Inspect and bind Scalable Vector Templates",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/svt-project/svt-typescript.git"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "docs",
+    "THIRD-PARTY-NOTICES.txt",
+    "conformance/SNAPSHOT.json",
+    "conformance/manifest.json",
+    "conformance/LICENSE",
+    "CONTRIBUTING.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "node eng/check.mjs",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "test:browser": "node eng/browser.mjs",
+    "format": "prettier --write src test eng docs README.md AGENTS.md CONTRIBUTING.md package.json tsconfig.json conformance/README.md"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "0.9.12"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "esbuild": "0.28.2",
+    "playwright": "1.65.1",
+    "prettier": "3.9.10"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

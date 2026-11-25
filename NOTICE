@@ -1,0 +1,9 @@
+SVT — Scalable Vector Templates
+Copyright (c) 2026 Bathos Pty Ltd
+
+Repository-authored source, documentation and examples are provided under MIT; see LICENSE.
+Canonical conformance assets are stamped copies from svt-project/svt-spec and retain their license.
+
+The runtime parser @xmldom/xmldom 0.9.12 is MIT-licensed. Its complete notice is retained in
+THIRD-PARTY-NOTICES.txt. Preserve that notice when distributing bundles containing the dependency.
+Development tools retain their own licenses; they are not runtime dependencies of the library.

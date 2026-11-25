@@ -1,0 +1,49 @@
+{
+  "format_version": 0,
+  "template_available": true,
+  "inputs": [
+    {
+      "key": "accent",
+      "label": "accent",
+      "kind": "paint",
+      "targets": [
+        {
+          "hook": "fill",
+          "element_name": "rect",
+          "default": {
+            "state": "present",
+            "raw": "red",
+            "source": "fill"
+          }
+        },
+        {
+          "hook": "stroke",
+          "element_name": "path",
+          "default": {
+            "state": "present",
+            "raw": "#ff0000",
+            "source": "stroke"
+          }
+        }
+      ],
+      "default": {
+        "state": "mixed",
+        "raw": null
+      },
+      "description": null,
+      "label_source": "key",
+      "order": null
+    }
+  ],
+  "input_groups": [
+    {
+      "key": null,
+      "label": null,
+      "description": null,
+      "order": null,
+      "input_keys": [
+        "accent"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+# Contributing
+
+Discuss public API, parser dependency, format and ownership changes before implementation. Keep
+inspection/binding independent of rendering, resource acquisition and Worker lifecycle. Work
+serially unless delegation is explicitly agreed. Use American English.
+
+Use Node 24 and Python 3. Install locked dependencies without lifecycle scripts:
+
+```sh
+npm ci --ignore-scripts
+npm run format
+npm run check
+```
+
+The gate checks the stamped conformance inventory, documentation links/formatting, strict TypeScript
+including dependency and consumer declarations, canonical observations, implementation-policy
+regressions, independent Expat output comparisons and a packed ESM/declaration consumer. Generated evidence stays under ignored
+`artifacts/`. No live spec dependency or optional interpretation conformance claim is introduced.
+
+For browser/runtime changes, run a dedicated Worker in Chromium:
+
+```sh
+npx playwright install chromium
+npm run test:browser
+```
+
+Alternatively set `SVT_CHROME_PATH` to an existing local Chrome executable. The runner uses an
+isolated headless browser and loopback server and closes both afterward. CI installs Chromium and
+runs the same Worker suite. Other engines and hard memory isolation are not implied.
+
+Update [API policy](docs/api.md) and [resource policy](docs/resource-policy.md) with behavior changes.
+A source/API declaration check must not conceal errors with `skipLibCheck` or suppressions.
+Negative consumer tests may use `@ts-expect-error` to verify prohibited public API usage.
+Review public identifiers, fixtures, comments and staged diffs for private references. Preserve
+licensing and attribution; never commit credentials, machine paths, IDE state or generated evidence.
+Do not publish packages or release tags without explicit authorization.

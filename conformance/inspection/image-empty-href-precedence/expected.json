@@ -1,0 +1,40 @@
+{
+  "format_version": 0,
+  "template_available": true,
+  "inputs": [
+    {
+      "key": "photo",
+      "label": "photo",
+      "kind": "image",
+      "targets": [
+        {
+          "hook": "image",
+          "element_name": "image",
+          "default": {
+            "state": "present",
+            "raw": "",
+            "source": "href"
+          }
+        }
+      ],
+      "default": {
+        "state": "common",
+        "raw": ""
+      },
+      "description": null,
+      "label_source": "key",
+      "order": null
+    }
+  ],
+  "input_groups": [
+    {
+      "key": null,
+      "label": null,
+      "description": null,
+      "order": null,
+      "input_keys": [
+        "photo"
+      ]
+    }
+  ]
+}
