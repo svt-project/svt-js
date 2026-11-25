@@ -4,6 +4,9 @@ const files = [
   "README.md",
   "AGENTS.md",
   "CONTRIBUTING.md",
+  "CHANGELOG.md",
+  "SECURITY.md",
+  "examples/README.md",
   "conformance/README.md",
   ...readdirSync("docs")
     .filter((n) => n.endsWith(".md"))

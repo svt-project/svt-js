@@ -1,6 +1,7 @@
 import { inspect, defaultInspectionLimits } from "../dist/index.js";
 import { canonical, svg, success, equal, semantics } from "./support.mjs";
 import fixtures from "../artifacts/fixtures.json";
+import { replacementCharacter } from "./xml-preservation.mjs";
 const result = canonical(fixtures);
 const check = (name, run) => {
   try {
@@ -14,6 +15,7 @@ check("Worker globals", () => {
   for (const name of ["DOMParser", "document", "Buffer", "process"])
     equal(typeof globalThis[name], "undefined");
 });
+check("Valid U+FFFD survives inspection and binding", replacementCharacter);
 check("UTF-8 capture and fresh byte export", () => {
   const bytes = new TextEncoder().encode(
     svg('<text data-svt-text="a">é😀</text>'),

@@ -14,19 +14,24 @@ npm run check
 
 The gate checks the stamped conformance inventory, documentation links/formatting, strict TypeScript
 including dependency and consumer declarations, canonical observations, implementation-policy
-regressions, independent Expat output comparisons and a packed ESM/declaration consumer. Generated evidence stays under ignored
-`artifacts/`. No live spec dependency or optional interpretation conformance claim is introduced.
+regressions, source-mapped coverage, executable examples, independent Expat output comparisons, and
+a packed ESM/declaration consumer. Generated evidence stays under ignored `artifacts/`.
 
 For browser/runtime changes, run a dedicated Worker in Chromium:
 
 ```sh
 npx playwright install chromium
 npm run test:browser
+npm run test:examples
 ```
 
 Alternatively set `SVT_CHROME_PATH` to an existing local Chrome executable. The runner uses an
 isolated headless browser and loopback server and closes both afterward. CI installs Chromium and
-runs the same Worker suite. Other engines and hard memory isolation are not implied.
+runs the same Worker suites. Other engines and hard memory isolation are not implied.
+
+See [coverage](docs/coverage.md) for local reports and Codecov setup. Run `npm audit` before a
+release candidate and retain its result alongside the separate implementation security review.
+[Coordinator issue #8](https://github.com/svt-project/.github/issues/8) tracks release readiness.
 
 Update [API policy](docs/api.md) and [resource policy](docs/resource-policy.md) with behavior changes.
 A source/API declaration check must not conceal errors with `skipLibCheck` or suppressions.

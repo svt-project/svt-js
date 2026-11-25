@@ -16,6 +16,9 @@ for (const [command, args] of [
       "test",
       "eng",
       "docs",
+      "examples",
+      "CHANGELOG.md",
+      "SECURITY.md",
       "README.md",
       "AGENTS.md",
       "CONTRIBUTING.md",
@@ -29,8 +32,9 @@ for (const [command, args] of [
     "node",
     ["node_modules/typescript/bin/tsc", "-p", "test/types/tsconfig.json"],
   ],
-  ["node", ["--test", "test/conformance.test.mjs", "test/policy.test.mjs"]],
+  ["node", ["eng/coverage.mjs"]],
   ["python3", ["eng/independent.py"]],
+  ["node", ["eng/examples.mjs"]],
   ["node", ["eng/package.mjs"]],
 ]) {
   console.log("> " + command + " " + args.join(" "));

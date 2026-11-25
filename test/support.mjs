@@ -1,4 +1,4 @@
-import { DOMParser } from "@xmldom/xmldom";
+import { DOMParser, onErrorStopParsing } from "@xmldom/xmldom";
 import { inspect } from "../dist/index.js";
 export const SVG = "http://www.w3.org/2000/svg",
   SVT = "https://svt-project.github.io/ns/svt",
@@ -77,9 +77,7 @@ export function equal(actual, expected) {
 export function semantics(source) {
   const doc = new DOMParser({
     normalizeLineEndings: (s) => s.replace(/\r\n?/g, "\n"),
-    onError(_level, message) {
-      throw new Error(message);
-    },
+    onError: onErrorStopParsing,
   }).parseFromString(source, "application/xml");
   function walk(n) {
     const content = [];

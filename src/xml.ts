@@ -3,7 +3,7 @@ import {
   DOMException,
   ParseError,
   XMLSerializer,
-  onWarningStopParsing,
+  onErrorStopParsing,
 } from "@xmldom/xmldom";
 import type { Node, Element, Document } from "@xmldom/xmldom";
 import type { InspectionLimits } from "./model.js";
@@ -64,7 +64,9 @@ export function parse(
   try {
     doc = new DOMParser({
       locator: false,
-      onError: onWarningStopParsing,
+      // Warnings can describe conforming content (for example a literal U+FFFD).
+      // Let the processor classify XML failures; errors and fatal errors stop parsing.
+      onError: onErrorStopParsing,
       normalizeLineEndings: (s) => s.replace(/\r\n?/g, "\n"),
     }).parseFromString(decoded, "application/xml");
   } catch (e) {

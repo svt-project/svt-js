@@ -37,4 +37,4 @@ necessarily checked after the parser allocates its tree. They control subsequent
 state; they do not bound parser peak memory. Template clones and encoding create additional
 allocations. The spike's seven resource probes do not establish protection against arbitrary DoS.
 
-Host-owned Worker termination and isolation are described in [the API policy](api.md#execution-and-cancellation).
+Host-owned Worker termination and isolation are described in [host integration](integration.md#cancel-by-terminating).

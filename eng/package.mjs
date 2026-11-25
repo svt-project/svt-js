@@ -26,6 +26,9 @@ for (const p of [
   "LICENSE",
   "THIRD-PARTY-NOTICES.txt",
   "conformance/SNAPSHOT.json",
+  "CHANGELOG.md",
+  "examples/template.svg",
+  "examples/live-preview/controller.js",
 ])
   assert.ok(paths.has(p), p);
 for (const p of paths)
@@ -47,7 +50,7 @@ npm(
 );
 writeFileSync(
   consumer + "/consume.mjs",
-  `import assert from 'node:assert/strict';import {inspect} from 'svt-typescript';const r=inspect('<svg xmlns="http://www.w3.org/2000/svg" data-svt-version="1.0"><text data-svt-text="a">old</text></svg>');assert.equal(r.ok,true);const b=r.value.bind([{key:'a',kind:'text',value:'new'}]);assert.equal(b.ok,true);assert.ok(b.value.svg.includes('>new</text>'));`,
+  `import assert from 'node:assert/strict';import {inspect} from '@svt-project/svt-js';const r=inspect('<svg xmlns="http://www.w3.org/2000/svg" data-svt-version="1.0"><text data-svt-text="a">old</text></svg>');assert.equal(r.ok,true);const b=r.value.bind([{key:'a',kind:'text',value:'new'}]);assert.equal(b.ok,true);assert.ok(b.value.svg.includes('>new</text>'));`,
 );
 execFileSync(process.execPath, ["consume.mjs"], {
   cwd: consumer,
@@ -55,7 +58,7 @@ execFileSync(process.execPath, ["consume.mjs"], {
 });
 const types = readFileSync("test/types/consumer.ts", "utf8").replace(
   "../../dist/index.js",
-  "svt-typescript",
+  "@svt-project/svt-js",
 );
 writeFileSync(consumer + "/consumer.ts", types);
 writeFileSync(
@@ -70,6 +73,11 @@ execFileSync(
     resolve(consumer, "tsconfig.json"),
   ],
   { stdio: "inherit" },
+);
+execFileSync(
+  process.execPath,
+  ["node_modules/@svt-project/svt-js/examples/node/bind.mjs"],
+  { cwd: consumer, stdio: "inherit" },
 );
 writeFileSync(
   "artifacts/package.json",

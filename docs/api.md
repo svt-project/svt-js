@@ -1,143 +1,88 @@
-# TypeScript API and processing policy
+# API reference
 
-The core provides synchronous inspection and binding with whole-template rejection and typed
-results. Hosts own Worker execution. Resource limits are documented separately in
-[resource policy](resource-policy.md). The implementation uses the reviewed conforming-input
-candidate; see [snapshot provenance](../conformance/SNAPSHOT.json).
+Import from `@svt-project/svt-js`. The package exposes synchronous functions and immutable records;
+parser and DOM types stay private. See [examples](../examples/README.md) for runnable code.
 
-## Scope and dependencies
-
-Use the scoped `@xmldom/xmldom` package, initially pinned to the tested 0.9.12. Keep parser classes
-private. Support browser main thread, dedicated Workers and Node with the same core. No React,
-network, filesystem, renderer, automatic Worker scheduling or second CLI in core. Npm identity and publication remain separate decisions.
-
-The core implements inspection, presentation metadata and atomic binding. Optional authored paint/image
-interpretation is a separate API and acceptance milestone, not part of inspection or binding. Do
-not claim that optional conformance profile until its cases pass. No schema or SVG property validator.
-
-## API shape
+## Inspection
 
 ```ts
-export function inspect(
-  source: string | Uint8Array,
-  options?: InspectionOptions,
-): Result<Template>;
-
-export interface Template {
-  readonly inputs: readonly TemplateInput[];
-  readonly groups: readonly InputGroup[];
-  bind(
-    bindings: readonly Binding[],
-    options?: BindingOptions,
-  ): Result<BoundSvg>;
-}
-
-export type Binding =
-  | { readonly key: string; readonly kind: "text"; readonly value: string }
-  | { readonly key: string; readonly kind: "paint"; readonly value: string }
-  | {
-      readonly key: string;
-      readonly kind: "image-reference";
-      readonly value: string;
-    }
-  | {
-      readonly key: string;
-      readonly kind: "image-content";
-      readonly bytes: Uint8Array;
-      readonly mediaType: string;
-    };
-
-export interface BoundSvg {
-  readonly svg: string;
-  toUtf8(): Uint8Array;
-}
-
-export type Result<T> =
-  | { readonly ok: true; readonly value: T }
-  | { readonly ok: false; readonly error: SvtError };
+inspect(source: string | Uint8Array, options?: InspectionOptions): Result<Template>
 ```
 
-Use an assignment array rather than a string dictionary: explicit kinds prevent ambiguity, shared
-paint targets remain one assignment, and accidental duplicate keys can be rejected. Omission keeps
-original content; empty strings deliberately replace it. No binding session, implicit color
-normalization, auto-fetching image source or default/unassigned sentinel.
+Strings are already-decoded XML. Byte input must be UTF-8 (a UTF-8 BOM is allowed); invalid byte
+sequences and conflicting encoding declarations fail. Format marker `1.0` is required.
+XML 1.0 is supported; DTD declarations are rejected. The parser does not load external resources.
 
-Source strings are already decoded XML; callers own their preceding decoding. The byte overload
-supports UTF-8, including a UTF-8 BOM, using fatal decoding; other byte encodings are unsupported in
-the initial profile. Byte input must declare UTF-8 if an encoding is present; the parsed declaration is checked before
-returning a template. String input has already been decoded, so its encoding declaration is not used
-to select or validate a decoder. This is an explicit TypeScript capability policy,
-not removal of .NET UTF-16 support or a portable format restriction.
+`Template.inputs` lists discovered inputs in structural order. Each input has:
 
-After a call returns, no mutable caller buffer or binding collection is retained. Input bytes are
-captured after admission checks when necessary; image bytes are captured for a bind and need no
-separate public EncodedImage factory in this profile. Concurrent mutation during a call is unsupported;
-reject SharedArrayBuffer-backed byte views rather than pretend a racing copy is atomic. BoundSvg
-contains immutable text and returns a fresh UTF-8 buffer. DOM state never escapes. Runtime-freeze
-inventory/result records and arrays; TypeScript readonly alone is insufficient for this promise.
-Every bind starts from the captured template, independently of previous outputs.
+| Field                  | Meaning                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------- |
+| `key`, `kind`          | Exact binding key and `text`, `paint`, or `image` kind.                                     |
+| `label`, `labelSource` | Effective label and its origin: `key`, `element`, or `metadata`.                            |
+| `description`, `order` | Authored presentation metadata, or `null`.                                                  |
+| `targets`              | Ordered hooks (`text`, `image`, `fill`, `stroke`), element names, and raw default evidence. |
+| `default`              | `common` with a raw string, or `mixed`/`absent` with `raw: null`.                           |
 
-## Inventory model
+A target default is `present` with a string (including empty), or `absent` with `raw: null`.
+Its source distinguishes text, fill, stroke, href, and XLink evidence. Values are XML-processed
+strings, not computed CSS or resolved resources.
 
-Preserve the specification's distinctions using discriminated unions and explicit nulls:
+`Template.groups` supplies presentation order and references the same input records. Group
+key/label/description/order can be `null` for the unnamed section. Grouping does not reorder
+`Template.inputs` or the targets within an input.
 
-- TemplateInput: exact key, effective label, text/image/paint kind, ordered targets, raw default
-  summary, description, label source and optional numeric presentation order.
-- Target: text/image/fill/stroke hook, SVG local element name and authored default evidence. Present
-  means a string, including empty; absent has no raw value. Evidence retains text/fill/stroke/href/
-  XLink origin. Do not expose parsed CSS, inferred resource locations or mutable XML.
-- Input summary: common with a raw string, mixed, or absent. Never infer equality by rendered color.
-- InputGroup: nullable key/label/description/order for the unnamed section, ordered references to
-  the same inventory inputs. Group presentation never reorders the structural inputs/targets.
+## Binding
 
-Errors currently omit source coordinates. Exact hook-attribute positions are not reconstructed.
-Messages are explanatory; only the documented code/key/limit fields are machine contracts.
+```ts
+template.bind(bindings: readonly Binding[], options?: BindingOptions): Result<BoundSvg>
+```
 
-## Error and recovery policy
+| Kind              | Payload                                  | Effect                                                         |
+| ----------------- | ---------------------------------------- | -------------------------------------------------------------- |
+| `text`            | `value: string`                          | Literal text replacement.                                      |
+| `paint`           | `value: string`                          | Literal paint applied to every fill/stroke target for the key. |
+| `image-reference` | `value: string`                          | Literal href/reference; nothing is fetched.                    |
+| `image-content`   | `bytes: Uint8Array`, `mediaType: string` | Embed supplied bytes as a base64 data URI.                     |
 
-Return a failure result for expected input/operation failures: XML parsing, unsupported root/marker,
-nonconforming SVT declarations, invalid assignments and resource refusal. Use a small stable
-classification (`xml-parse`, `unsupported-template`, `invalid-template`, `invalid-binding`,
-`limit-exceeded`) with explanatory message, optional input key and optional limit name. Message wording and mixed-fault precedence are not compatibility contracts.
+Every binding also has `key: string`. Duplicate keys, unknown keys, wrong kinds, and
+XML-unrepresentable values fail the whole bind. Strings are not evaluated as markup, CSS, or code;
+paint and image references are not validated against a renderer's capabilities.
 
-Reject the entire operation on the first detected relevant failure. No partial template or output,
-warning collection, unknown-key ignore mode or scoped metadata salvage in this profile. Reject duplicate
-assignments, wrong kinds, unknown keys and XML-unrepresentable replacement strings. This simpler
-policy is allowed by the relaxed spec; .NET's tolerant authoring model remains separate.
+Each bind starts from the captured template. Omitted keys preserve authored content; an empty
+string is an explicit replacement. `BoundSvg.svg` is the complete output string and `toUtf8()`
+returns a fresh byte array on every call.
 
-Recognized invalid metadata is distinct from valid foreign/explicitly ignored content. Do not
-reject unknown SVG elements, unfamiliar paint/reference strings or permitted opaque metadata just
-because they are unfamiliar. The normal parser remains responsible for malformed XML reporting;
-we are not implementing an independent XML validator.
+## Results and errors
 
-Invalid options, wrong runtime argument shapes and programmer misuse throw TypeError/RangeError.
-Do not catch arbitrary defects or allocation failures and label them malformed user input.
+`Result<T>` is `{ ok: true, value: T }` or `{ ok: false, error: SvtError }`. Failures expose no
+partial template/output. `SvtError` has a code and message, plus optional `inputKey` and `limit`.
 
-## Execution and cancellation
+| Code                   | Meaning                                            |
+| ---------------------- | -------------------------------------------------- |
+| `xml-parse`            | Parser, byte-decoding, or XML admission failure.   |
+| `unsupported-template` | Unsupported root or template marker.               |
+| `invalid-template`     | Detected invalid SVT hooks or recognized metadata. |
+| `invalid-binding`      | Invalid replacement assignment.                    |
+| `limit-exceeded`       | A configured operation limit was exceeded.         |
 
-Keep core operations synchronous. Do not add Promise wrappers or an AbortSignal parameter that
-suggests an active xmldom call can process queued cancellation events. A host can call the core in a
-Worker, keep the Template there, and exchange serializable inventory/results. Template handles are
-not transferable DOM objects.
+Use codes, keys, and limit names for program logic. Message wording, source positions, and ordering
+among multiple faults are not contracts. Invalid options or runtime argument shapes throw
+`TypeError`/`RangeError`; programming defects and allocation failures are not converted to input errors.
 
-The host owns Worker queue limits, elapsed-time deadlines, termination and recreation. Terminating
-active work discards Worker-held templates; reload/reinspect source when needed. Host cancellation
-is distinct from an engine error and should not become an XML diagnostic. Test this host boundary
-before the cookbook relies on it. Worker termination improves responsiveness but is not a hard
-process/browser memory ceiling; adversarial multitenant server work requires host-level isolation.
-The library does not ship a Worker client or retain a host scheduling policy.
+Parser errors/fatal errors reject inspection; warnings alone do not. Recognized invalid SVT metadata
+fails the operation, while permitted foreign/ignored content remains opaque. The library adds no
+independent XML validator or partial-recovery mode.
 
-## Validation obligations
+## Ownership and limits
 
-- Adopt a reviewed stamped canonical snapshot; preserve independent tests and differential checks.
-  Do not fetch live spec assets. Spec candidate publication is a separate action.
-- Execute all inspection/substitution cases, byte-boundary cases, repeated binding ownership and
-  parser-preservation regressions in Node and selected browser engines.
-- Cover equality/excess for actual implemented limits, input/output expansion and atomic failures.
-  Measure representative documents and revisit defaults before describing production support.
-- Verify no external entity/resource loading, escaped literal values and complete output. The engine
-  preserves authored SVG; safe preview/rendering remains a host capability, not an SVT sanitizer.
-- Preserve XML 1.0 line normalization and the text-CR serialization invariant from the spike. Do not
-  accept external DOM objects or add raw-markup replacement without reopening that design.
-- Keep a pinned dependency, legal notices, strict TypeScript declarations and consumer packaging
-  checks. Optional interpretation gets its own acceptance suite when added.
+Records and arrays are frozen at runtime. No mutable input buffer or binding collection is retained
+after a call. SharedArrayBuffer-backed views are rejected; concurrent mutation during a call is
+unsupported. The DOM never escapes through the public API.
+
+`InspectionOptions` and `BindingOptions` override individual values from exported
+`defaultInspectionLimits` and `defaultBindingLimits`. See [resource policy](resource-policy.md) for
+defaults and enforcement timing. There is no global mutable configuration.
+
+Hosts own files, networks, rendering, queues, cancellation, and deadlines. See
+[Worker integration](integration.md). Optional authored-value interpretation is not implemented;
+inspection retains raw evidence rather than normalizing colors or image references.
