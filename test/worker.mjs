@@ -2,6 +2,7 @@ import { inspect, defaultInspectionLimits } from "../dist/index.js";
 import { canonical, svg, success, equal, semantics } from "./support.mjs";
 import fixtures from "../artifacts/fixtures.json";
 import { replacementCharacter } from "./xml-preservation.mjs";
+import { fragmentedText, textPositions } from "./text-binding.mjs";
 const result = canonical(fixtures);
 const check = (name, run) => {
   try {
@@ -16,6 +17,8 @@ check("Worker globals", () => {
     equal(typeof globalThis[name], "undefined");
 });
 check("Valid U+FFFD survives inspection and binding", replacementCharacter);
+check("Fragmented text preserves comments and PIs", () => fragmentedText());
+check("Text positions and multiple hooks survive copying", textPositions);
 check("UTF-8 capture and fresh byte export", () => {
   const bytes = new TextEncoder().encode(
     svg('<text data-svt-text="a">é😀</text>'),
