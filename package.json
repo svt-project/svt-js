@@ -26,14 +26,22 @@
     "conformance/SNAPSHOT.json",
     "conformance/manifest.json",
     "conformance/LICENSE",
-    "CONTRIBUTING.md"
+    "CONTRIBUTING.md",
+    "examples",
+    "CHANGELOG.md",
+    "SECURITY.md"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "node eng/check.mjs",
     "test": "npm run build && node --test test/*.test.mjs",
     "test:browser": "node eng/browser.mjs",
-    "format": "prettier --write src test eng docs README.md AGENTS.md CONTRIBUTING.md package.json tsconfig.json conformance/README.md"
+    "format": "prettier --write src test eng docs README.md AGENTS.md CONTRIBUTING.md package.json tsconfig.json conformance/README.md examples CHANGELOG.md SECURITY.md",
+    "coverage": "npm run build && node eng/coverage.mjs",
+    "example:node": "npm run build && node examples/node/bind.mjs",
+    "example:browser": "npm run build && node eng/examples.mjs --serve",
+    "test:examples": "npm run build && node eng/examples-browser.mjs",
+    "audit": "npm audit"
   },
   "dependencies": {
     "@xmldom/xmldom": "0.9.12"

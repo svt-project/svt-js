@@ -23,5 +23,38 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm run check
+      - name: Retain source coverage
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: coverage
+          path: artifacts/coverage/
+          if-no-files-found: error
+          retention-days: 14
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
+      - run: npm run test:examples
+  coverage:
+    if: ${{ vars.CODECOV_ENABLED == 'true' }}
+    needs: validation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: coverage
+          path: artifacts/coverage
+          digest-mismatch: error
+      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7
+        with:
+          use_oidc: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+          files: artifacts/coverage/lcov.info
+          flags: node
+          disable_search: true
+          fail_ci_if_error: true

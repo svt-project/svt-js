@@ -1,50 +1,63 @@
 # SVT for JavaScript
 
-Inspect named inputs in SVG templates and replace text, paint, or images while preserving the
-surrounding artwork. SVG owns geometry and layout; SVT supplies literal values without evaluating
-CSS, loading resources, or rendering the document.
+[![Validation](https://github.com/svt-project/svt-js/actions/workflows/validate.yml/badge.svg?branch=master)](https://github.com/svt-project/svt-js/actions/workflows/validate.yml)
+[![Coverage](https://img.shields.io/badge/coverage-CI%20report-007b67)](https://github.com/svt-project/svt-js/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+Inspect named inputs in SVG artwork and bind text, paint, or images. The same synchronous library
+runs in Node, browsers, and Workers. SVG keeps control of layout and rendering.
+
+The package name is **`@svt-project/svt-js`**. Include the scope in imports and dependencies;
+`svt-js` is a different npm package. npm publication is pending. To try this checkout:
+
+```sh
+npm ci --ignore-scripts
+npm run example:node
+```
+
+This writes a [sample invitation](examples/template.svg), with new text, a shared accent color,
+and an embedded image, to `artifacts/examples/invitation.svg`.
+
+## Inspect and bind
 
 ```ts
 import { inspect } from "@svt-project/svt-js";
 
-const inspection = inspect(xmlText); // string or UTF-8 Uint8Array
-if (!inspection.ok) {
-  console.error(inspection.error.message);
-} else {
-  const result = inspection.value.bind([
-    { key: "heading", kind: "text", value: "Welcome" },
-    { key: "accent", kind: "paint", value: "#336699" },
-  ]);
-  if (result.ok) {
-    const svgText = result.value.svg;
-    const utf8Bytes = result.value.toUtf8();
-  }
-}
+const source = `<svg xmlns="http://www.w3.org/2000/svg"
+    width="320" height="80" data-svt-version="1.0">
+  <text x="16" y="48" font-size="28" fill="#007b67"
+    data-svt-text="heading" data-svt-fill="accent">Hello</text>
+</svg>`;
+const inspection = inspect(source); // Also accepts UTF-8 Uint8Array.
+if (!inspection.ok) throw new Error(inspection.error.message);
+
+const template = inspection.value;
+console.log(template.inputs); // Keys, labels, kinds, targets, and authored defaults.
+const result = template.bind([
+  { key: "heading", kind: "text", value: "Welcome <everyone>" },
+  { key: "accent", kind: "paint", value: "#336699" },
+]);
+if (!result.ok) throw new Error(result.error.message);
+
+console.log(result.value.svg); // Replacement text is escaped, not treated as XML.
+const bytes = result.value.toUtf8();
 ```
 
-Inspection exposes immutable authored defaults, target lists, labels, descriptions and presentation
-groups. Each bind starts from the captured template. Omitted inputs preserve original content;
-empty strings are explicit replacements. A failed operation returns no partial template or output.
+Reuse the inspected template for each variation. Omitted keys keep their authored values; empty
+strings replace them. Invalid input returns a failure with no partial output.
 
-The same synchronous core runs in Node, browser code and dedicated Workers. Hosts own Worker
-scheduling, deadlines, termination, resource access and safe SVG previews. The parser is the scoped
-`@xmldom/xmldom` package; its DOM and mutable buffers remain private.
+## Examples and guides
 
-- [API and processing policy](docs/api.md)
-- [Resource limits and their enforcement boundaries](docs/resource-policy.md)
-- [Conformance and validation](docs/conformance.md)
-- [Contributing](CONTRIBUTING.md)
-- [Canonical specification](https://github.com/svt-project/svt-spec)
-- [Project site](https://svt-project.github.io/)
+- [Runnable examples](examples/README.md): files and image embedding in Node; live browser preview.
+- [Worker integration](docs/integration.md): coalescing, cancellation, deadlines, and preview cleanup.
+- [API reference](docs/api.md): bindings, inventory, errors, and ownership.
+- [Resource limits](docs/resource-policy.md) and [conformance](docs/conformance.md).
+- [Changelog](CHANGELOG.md), [contributing](CONTRIBUTING.md), and [security](SECURITY.md).
 
-Templates use marker `1.0` and metadata namespace `https://svt-project.github.io/ns/svt`.
-This implementation supports inspection and binding; optional authored-value interpretation is a
-separate follow-up. The accepted reference snapshot identifies a reviewed, unpublished specification
-candidate; it does not rename an earlier publication. See [provenance](conformance/SNAPSHOT.json).
+SVT does not fetch references, evaluate replacements, render SVG, or sanitize authored artwork.
+Hosts own resource access and preview isolation. Templates use format marker `1.0`; central metadata
+uses `https://svt-project.github.io/ns/svt`. See the [specification](https://github.com/svt-project/svt-spec)
+and [project site](https://svt-project.github.io/).
 
-Build a source checkout with `npm ci --ignore-scripts` and `npm run build`. The package has ESM exports and generated
-TypeScript declarations. Its npm identity is `@svt-project/svt-js`; publication remains a separate
-step and the package is private. No
-package or specification release is implied by this repository.
-
-Repository-authored material is MIT-licensed; see [LICENSE](LICENSE) and [NOTICE](NOTICE).
+ESM with TypeScript declarations; Node 24+ for Node usage. Browser builds use standard Web APIs.
+Licensed under [MIT](LICENSE); [NOTICE](NOTICE) preserves attribution.

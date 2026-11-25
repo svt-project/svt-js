@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SVT Worker preview</title>
+    <style>
+      body {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+        font: 16px system-ui;
+        color: #173b45;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      p {
+        line-height: 1.5;
+      }
+      form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: end;
+      }
+      label {
+        display: grid;
+        gap: 6px;
+      }
+      input,
+      button {
+        font: inherit;
+        padding: 8px;
+      }
+      input[type="color"] {
+        height: 40px;
+        padding: 2px;
+      }
+      img {
+        display: block;
+        width: 100%;
+        margin-top: 24px;
+        border: 1px solid #dde5e0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Live SVG preview in a Worker</h1>
+    <p>
+      Edit rapidly: only the newest complete state is rendered. Cancel stops the
+      Worker; the next edit reloads the template.
+    </p>
+    <form onsubmit="return false;">
+      <label
+        >Heading <input id="heading" value="Make it yours" maxlength="80"
+      /></label>
+      <label>Accent <input id="accent" type="color" value="#007b67" /></label>
+      <button id="reset" type="button">Reset</button>
+      <button id="cancel" type="button">Cancel</button>
+    </form>
+    <p id="status" role="status">Loading…</p>
+    <img id="preview" alt="Bound template preview" width="640" height="320" />
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

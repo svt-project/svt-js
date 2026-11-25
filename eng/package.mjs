@@ -26,6 +26,9 @@ for (const p of [
   "LICENSE",
   "THIRD-PARTY-NOTICES.txt",
   "conformance/SNAPSHOT.json",
+  "CHANGELOG.md",
+  "examples/template.svg",
+  "examples/live-preview/controller.js",
 ])
   assert.ok(paths.has(p), p);
 for (const p of paths)
@@ -70,6 +73,11 @@ execFileSync(
     resolve(consumer, "tsconfig.json"),
   ],
   { stdio: "inherit" },
+);
+execFileSync(
+  process.execPath,
+  ["node_modules/@svt-project/svt-js/examples/node/bind.mjs"],
+  { cwd: consumer, stdio: "inherit" },
 );
 writeFileSync(
   "artifacts/package.json",
