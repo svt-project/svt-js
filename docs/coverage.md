@@ -14,7 +14,9 @@ fixtures, and dependencies are excluded from library metrics. Browser Worker che
 the report does not claim browser coverage or security assurance. Percentages are informational,
 not a target for adding low-value tests.
 
-CI retains the report as the `coverage` artifact. Codecov upload is prepared but runs only when the
-repository variable `CODECOV_ENABLED` is `true`. Enable the repository in Codecov and verify the
-first report before replacing the README's artifact badge with a live Codecov badge. Uploads use
-OIDC for trusted runs and Codecov's public tokenless support for fork PRs, matching the .NET project.
+CI retains the Node 24 report as the `coverage` artifact. With the repository variable
+`CODECOV_ENABLED=true`, CI uploads its LCOV file under the `node` flag. Codecov reports project
+and patch coverage as informational checks. The README badge shows
+[Codecov coverage on `master`](https://app.codecov.io/gh/svt-project/svt-js/tree/master).
+
+Trusted runs authenticate with GitHub OIDC. Fork pull requests use Codecov's public tokenless upload.

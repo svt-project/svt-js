@@ -1,7 +1,7 @@
 # SVT for JavaScript
 
 [![Validation](https://github.com/svt-project/svt-js/actions/workflows/validate.yml/badge.svg?branch=master)](https://github.com/svt-project/svt-js/actions/workflows/validate.yml)
-[![Coverage](https://img.shields.io/badge/coverage-CI%20report-007b67)](https://github.com/svt-project/svt-js/actions/workflows/validate.yml)
+[![Codecov](https://codecov.io/gh/svt-project/svt-js/branch/master/graph/badge.svg)](https://app.codecov.io/gh/svt-project/svt-js/tree/master)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 Inspect named inputs in SVG artwork and bind text, paint, or images. The same synchronous library
