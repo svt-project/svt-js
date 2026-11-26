@@ -1,9 +1,9 @@
 {
   "repository": "https://github.com/svt-project/svt-spec",
-  "commit": "21e677727545dc3d9fe30511fbddc93ca023851e",
+  "commit": "82def4429a4b4e68977928d1040bfd1c11066b8e",
   "specification_version": "1.0.0-rc.2",
   "template_format": "1.0",
-  "sha256": "a26bb37f6f64b362057d466e894bcb68cca84aca268c5c6b31e2754c874e2769",
+  "sha256": "458c415c14815f5cbb098152893399cade0fb9027c5fe6647dd58d27fe42a968",
   "status": "Reviewed candidate branch snapshot; not a published spec edition",
   "implemented_profiles": [
     "inspection",

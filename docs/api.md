@@ -44,7 +44,9 @@ template.bind(bindings: readonly Binding[], options?: BindingOptions): Result<Bo
 | `image-reference` | `value: string`                          | Literal href/reference; nothing is fetched.                    |
 | `image-content`   | `bytes: Uint8Array`, `mediaType: string` | Embed supplied bytes as a base64 data URI.                     |
 
-Every binding also has `key: string`. Duplicate keys, unknown keys, wrong kinds, and
+Every binding also has `key: string`. One assignment updates every target of that key. Text and
+image keys can repeat just as paint keys can. A template mixing input kinds under one key fails
+inspection. Duplicate assignments, unknown keys, wrong kinds, and
 XML-unrepresentable values fail the whole bind. Strings are not evaluated as markup, CSS, or code;
 paint and image references are not validated against a renderer's capabilities.
 

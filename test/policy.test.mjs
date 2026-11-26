@@ -392,6 +392,40 @@ test("output equality/excess and repeated escaped/image growth preflight", () =>
     "maxOutputBytes",
   );
 });
+test("shared text and image inputs count once on submission and per write on output", () => {
+  const t = success(
+    inspect(
+      svg(
+        '<text data-svt-text="t"/><text data-svt-text="t"/>' +
+          '<image data-svt-image="i"/><image data-svt-image="i" x:href="old"/>',
+        'xmlns:x="http://www.w3.org/1999/xlink"',
+      ),
+    ),
+  );
+  const assignments = [
+    { key: "t", kind: "text", value: "<&" },
+    {
+      key: "i",
+      kind: "image-content",
+      bytes: new Uint8Array([1, 2, 3]),
+      mediaType: "image/png",
+    },
+  ];
+  const limits = {
+    maxBindings: 2,
+    maxTotalValueCharacters: 4,
+    maxTotalImageBytes: 3,
+  };
+  const bound = success(t.bind(assignments, limits));
+  assert.equal(bound.svg.match(/&lt;&amp;/g)?.length, 2);
+  assert.equal(bound.svg.match(/data:image\/png;base64,AQID/g)?.length, 3);
+  const size = bound.toUtf8().length;
+  success(t.bind(assignments, { ...limits, maxOutputBytes: size }));
+  limited(
+    t.bind(assignments, { ...limits, maxOutputBytes: size - 1 }),
+    "maxOutputBytes",
+  );
+});
 test("programming misuse throws, options are copied, defaults frozen", () => {
   for (const source of [null, undefined, {}, 123])
     assert.throws(() => inspect(source), TypeError);

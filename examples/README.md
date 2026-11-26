@@ -9,8 +9,8 @@ From a source checkout, install once with `npm ci --ignore-scripts`. The example
 npm run example:node
 ```
 
-[bind.mjs](node/bind.mjs) reads [template.svg](template.svg), lists its inputs, binds text and a
-shared fill/stroke color, embeds [artwork.svg](artwork.svg), and writes
+[bind.mjs](node/bind.mjs) reads [template.svg](template.svg), lists its inputs, binds the same heading to the
+SVG title and visible text, updates the shared fill/stroke color, embeds [artwork.svg](artwork.svg), and writes
 `artifacts/examples/invitation.svg`. Open that output in an SVG viewer.
 
 For another output path, build once and run:

@@ -74,12 +74,15 @@ try {
       const source = await (await fetch(image.src)).text();
       return {
         url: image.src,
-        text: new DOMParser()
-          .parseFromString(source, "image/svg+xml")
-          .querySelector('[data-svt-text="heading"]').textContent,
+        headings: Array.from(
+          new DOMParser()
+            .parseFromString(source, "image/svg+xml")
+            .querySelectorAll('[data-svt-text="heading"]'),
+          (target) => target.textContent,
+        ),
       };
     });
-    assert.equal(result.text, text);
+    assert.deepEqual(result.headings, [text, text]);
     previousUrl = result.url;
   };
   await waitForText("Make it yours");
