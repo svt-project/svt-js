@@ -1,10 +1,10 @@
-name: Publish npm release candidate
+name: Verify and publish npm releases
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: Reviewed package version (for example 1.0.0-rc.1)
+        description: Reviewed package version (stable or rc.N)
         required: true
         type: string
       sha512:
@@ -12,7 +12,7 @@ on:
         required: true
         type: string
       publish:
-        description: Publish the verified tarball to the public npm rc tag
+        description: Publish the verified tarball to the matching public npm dist-tag
         type: boolean
         default: false
 
@@ -20,12 +20,14 @@ permissions:
   contents: read
 
 concurrency:
-  group: publish-npm-rc
+  group: publish-npm
   cancel-in-progress: false
 
 jobs:
   candidate:
-    if: github.ref == 'refs/heads/master'
+    if: ${{ !inputs.publish || github.ref == 'refs/heads/master' }}
+    outputs:
+      tag: ${{ steps.verify.outputs.tag }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
@@ -41,15 +43,29 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: node eng/package.mjs
       - name: Verify the reviewed tarball was reproduced
+        id: verify
         run: |
           set -euo pipefail
-          [[ "$VERSION" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)-rc\.(0|[1-9][0-9]*)$ ]]
+          number='(0|[1-9][0-9]*)'
+          stable="^${number}\.${number}\.${number}"
+          if [[ "$VERSION" =~ ${stable}$ ]]; then
+            tag=latest
+          elif [[ "$VERSION" =~ ${stable}-rc\.${number}$ ]]; then
+            tag=rc
+          else
+            exit 1
+          fi
           [[ "$SHA512" =~ ^[0-9a-f]{128}$ ]]
           mv "artifacts/svt-project-svt-js-$VERSION.tgz" candidate.tgz
           printf '%s  candidate.tgz\n' "$SHA512" | sha512sum --check --strict
-          tar -xOzf candidate.tgz package/package.json | jq -e --arg v "$VERSION" '
+          tar -xOzf candidate.tgz package/package.json | jq -e --arg v "$VERSION" --arg tag "$tag" '
             .name == "@svt-project/svt-js" and .version == $v and .private != true
-            and .publishConfig.access == "public" and .publishConfig.tag == "rc"'
+            and .publishConfig.access == "public" and .publishConfig.tag == $tag'
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+      - name: Rehearse publication of the verified tarball
+        env:
+          TAG: ${{ steps.verify.outputs.tag }}
+        run: npm publish ./candidate.tgz --registry=https://registry.npmjs.org --access public --tag "$TAG" --dry-run --ignore-scripts
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: npm-candidate
@@ -58,7 +74,7 @@ jobs:
           retention-days: 7
 
   publish:
-    if: inputs.publish
+    if: inputs.publish && github.ref == 'refs/heads/master'
     needs: candidate
     runs-on: ubuntu-24.04
     timeout-minutes: 5
@@ -77,7 +93,8 @@ jobs:
       - name: Publish the exact tarball with npm provenance
         env:
           SHA512: ${{ inputs.sha512 }}
+          TAG: ${{ needs.candidate.outputs.tag }}
         run: |
           set -euo pipefail
           printf '%s  candidate.tgz\n' "$SHA512" | sha512sum --check --strict
-          npm publish ./candidate.tgz --registry=https://registry.npmjs.org --access public --tag rc --provenance --ignore-scripts
+          npm publish ./candidate.tgz --registry=https://registry.npmjs.org --access public --tag "$TAG" --provenance --ignore-scripts

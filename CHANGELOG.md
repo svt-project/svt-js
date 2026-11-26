@@ -2,6 +2,11 @@
 
 Consumer-facing changes are recorded here. Package versions are independent of the template format.
 
+## 1.0.0-rc.2
+
+- Accept UTF-8 template bytes and encoded image bytes from same-origin iframes, including subarrays.
+- Adopt the stable SVT 1.0.0 specification with the same canonical reference assets.
+
 ## 1.0.0-rc.1
 
 - Inspect format `1.0` SVG templates, exposing named inputs, authored defaults, labels, and groups.
