@@ -2,7 +2,7 @@
 
 Consumer-facing changes are recorded here. Package versions are independent of the template format.
 
-## Unreleased
+## 1.0.0-rc.3
 
 - Interpret authored paint and image values per target, preserving the original evidence and shared defaults.
 
