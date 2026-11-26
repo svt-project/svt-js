@@ -1,6 +1,6 @@
 {
   "name": "@svt-project/svt-js",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0",
   "type": "module",
   "description": "Inspect and bind Scalable Vector Templates",
   "license": "MIT",
@@ -47,16 +47,16 @@
     "@xmldom/xmldom": "0.9.12"
   },
   "devDependencies": {
-    "typescript": "7.0.2",
     "esbuild": "0.28.2",
     "playwright": "1.65.1",
-    "prettier": "3.9.10"
+    "prettier": "3.9.10",
+    "typescript": "7.0.2"
   },
   "engines": {
     "node": ">=24"
   },
   "publishConfig": {
     "access": "public",
-    "tag": "rc"
+    "tag": "latest"
   }
 }
