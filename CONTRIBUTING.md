@@ -17,17 +17,18 @@ including dependency and consumer declarations, canonical observations, implemen
 regressions, source-mapped coverage, executable examples, independent Expat output comparisons, and
 a packed ESM/declaration consumer. Generated evidence stays under ignored `artifacts/`.
 
-For browser/runtime changes, run a dedicated Worker in Chromium:
+For browser/runtime changes, run a dedicated Worker in Chromium and Firefox:
 
 ```sh
-npx playwright install chromium
+npx playwright install chromium firefox
 npm run test:browser
+npm run test:browser -- firefox
 npm run test:examples
 ```
 
-Alternatively set `SVT_CHROME_PATH` to an existing local Chrome executable. The runner uses an
-isolated headless browser and loopback server and closes both afterward. CI installs Chromium and
-runs the same Worker suites. Other engines and hard memory isolation are not implied.
+Set `SVT_CHROME_PATH` to use an existing local Chrome executable for Chromium checks. Firefox
+uses a temporary application-data directory and profile. CI runs the Worker suite in both browsers
+and the live-preview example in Chromium.
 
 See [coverage](docs/coverage.md) for local reports and Codecov setup. Run `npm audit` before a
 release candidate and retain its result alongside the separate implementation security review.

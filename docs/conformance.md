@@ -13,9 +13,9 @@ minidom/Expat independently checks substitution outputs. Tests cover repeated bi
 UTF-8 boundaries, ownership, metadata, resource limits, and independently generated multi-megabyte
 artwork. They do not establish throughput or peak-memory guarantees.
 
-Chromium executes the same core and canonical cases in a dedicated Worker. The separate
+Chromium and Firefox execute the same core and canonical cases in a dedicated Worker. The separate
 [integration example](../examples/README.md) checks live updates, coalescing, cancellation, reload,
-and preview cleanup. Other browser engines remain release-readiness work.
+and preview cleanup in Chromium.
 
 The parser owns XML error reporting. SVT does not add schema validation, renderer property
 validation, or sanitization. See [API policy](api.md), [resource limits](resource-policy.md), and

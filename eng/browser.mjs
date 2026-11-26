@@ -1,8 +1,20 @@
 import { build } from "esbuild";
-import { chromium } from "playwright";
+import { chromium, firefox } from "playwright";
 import http from "node:http";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { fixtures } from "./fixtures.mjs";
+const [engine = "chromium", ...extra] = process.argv.slice(2);
+if (extra.length || !["chromium", "firefox"].includes(engine))
+  throw new Error("Usage: node eng/browser.mjs [chromium|firefox]");
+
 mkdirSync("artifacts", { recursive: true });
 writeFileSync("artifacts/fixtures.json", JSON.stringify(fixtures()));
 await build({
@@ -37,13 +49,20 @@ const server = http.createServer((req, res) => {
 });
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 let browser;
+let firefoxAppData;
 try {
-  browser = await chromium.launch({
-    headless: true,
-    ...(process.env.SVT_CHROME_PATH
-      ? { executablePath: process.env.SVT_CHROME_PATH }
-      : {}),
-  });
+  if (engine === "firefox") {
+    // Firefox consults its app-data directory even with a temporary Playwright
+    // profile. Give the test its own directory so it can launch on macOS.
+    firefoxAppData = mkdtempSync(join(tmpdir(), "svt-firefox-"));
+    browser = await firefox.launch({
+      env: { ...process.env, MOZ_APP_DATA: firefoxAppData },
+    });
+  } else {
+    browser = await chromium.launch({
+      executablePath: process.env.SVT_CHROME_PATH,
+    });
+  }
   const context = await browser.newContext(),
     origin = "http://127.0.0.1:" + server.address().port,
     unexpected = [];
@@ -66,9 +85,9 @@ try {
     () => window.result ?? { ok: false, error: window.failure },
   );
   writeFileSync(
-    "artifacts/browser.json",
+    engine === "chromium" ? "artifacts/browser.json" : "artifacts/firefox.json",
     JSON.stringify(
-      { ...result, browser: browser.version(), unexpected },
+      { ...result, engine, browser: browser.version(), unexpected },
       null,
       2,
     ),
@@ -76,6 +95,7 @@ try {
   console.log(
     JSON.stringify(
       {
+        engine,
         browser: browser.version(),
         worker: result.worker,
         passed: result.results?.filter((r) => r.ok).length,
@@ -94,6 +114,11 @@ try {
   )
     process.exitCode = 1;
 } finally {
-  if (browser) await browser.close();
-  await new Promise((resolve) => server.close(resolve));
+  try {
+    await browser?.close();
+  } finally {
+    await new Promise((resolve) => server.close(resolve));
+    if (firefoxAppData)
+      rmSync(firefoxAppData, { recursive: true, force: true });
+  }
 }
