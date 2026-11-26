@@ -2,7 +2,7 @@
 
 Consumer-facing changes are recorded here. Package versions are independent of the template format.
 
-## Unreleased
+## 1.0.0-rc.1
 
 - Inspect format `1.0` SVG templates, exposing named inputs, authored defaults, labels, and groups.
 - Bind text, paint, image references, and encoded image bytes with whole-operation rejection,
