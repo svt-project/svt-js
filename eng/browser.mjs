@@ -1,5 +1,5 @@
 import { build } from "esbuild";
-import { chromium, firefox } from "playwright";
+import { chromium, firefox, webkit } from "playwright";
 import http from "node:http";
 import {
   mkdirSync,
@@ -12,8 +12,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fixtures } from "./fixtures.mjs";
 const [engine = "chromium", ...extra] = process.argv.slice(2);
-if (extra.length || !["chromium", "firefox"].includes(engine))
-  throw new Error("Usage: node eng/browser.mjs [chromium|firefox]");
+if (extra.length || !["chromium", "firefox", "webkit"].includes(engine))
+  throw new Error("Usage: node eng/browser.mjs [chromium|firefox|webkit]");
 
 mkdirSync("artifacts", { recursive: true });
 writeFileSync("artifacts/fixtures.json", JSON.stringify(fixtures()));
@@ -69,6 +69,8 @@ try {
     browser = await firefox.launch({
       env: { ...process.env, MOZ_APP_DATA: firefoxAppData },
     });
+  } else if (engine === "webkit") {
+    browser = await webkit.launch();
   } else {
     browser = await chromium.launch({
       executablePath: process.env.SVT_CHROME_PATH,
@@ -104,7 +106,9 @@ try {
     () => window.result ?? { ok: false, error: window.failure },
   );
   writeFileSync(
-    engine === "chromium" ? "artifacts/browser.json" : "artifacts/firefox.json",
+    engine === "chromium"
+      ? "artifacts/browser.json"
+      : `artifacts/${engine}.json`,
     JSON.stringify(
       { ...result, engine, browser: browser.version(), unexpected },
       null,

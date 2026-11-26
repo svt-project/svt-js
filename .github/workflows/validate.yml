@@ -39,9 +39,10 @@ jobs:
       - name: Test browser Workers and preview examples
         if: matrix.node == 24
         run: |
-          npx playwright install --with-deps chromium firefox
+          npx playwright install --with-deps chromium firefox webkit
           npm run test:browser
           npm run test:browser -- firefox
+          npm run test:browser -- webkit
           npm run test:examples
   # Branch protection requires this check to cover every supported CI runtime.
   validation:

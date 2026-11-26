@@ -13,8 +13,10 @@ minidom/Expat independently checks substitution outputs. Tests cover repeated bi
 UTF-8 boundaries, ownership, metadata, resource limits, and independently generated multi-megabyte
 artwork. They do not establish throughput or peak-memory guarantees.
 
-Chromium and Firefox execute the same core and canonical cases in a dedicated Worker. Both browsers also exercise
-template and image bytes created by a same-origin iframe. The separate
+CI runs the same core and canonical cases in dedicated Workers in Playwright Chromium, Firefox,
+and WebKit on Ubuntu 24.04. Each engine also checks template and image bytes created by a
+same-origin iframe. WebKit 27.2 from Playwright 1.65.1 also passed these checks locally on macOS.
+Safari releases on macOS and iOS remain unverified. The separate
 [integration example](../examples/README.md) checks live updates, coalescing, cancellation, reload,
 and preview cleanup in Chromium.
 

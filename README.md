@@ -61,4 +61,5 @@ uses `https://svt-project.github.io/ns/svt`. See the [specification](https://git
 and [project site](https://svt-project.github.io/).
 
 ESM with TypeScript declarations; Node 24+ for Node usage. Browser builds use standard Web APIs.
+CI tests dedicated Workers in Chromium, Firefox, and WebKit. See [browser coverage](docs/conformance.md).
 Licensed under [MIT](LICENSE); [NOTICE](NOTICE) preserves attribution.
