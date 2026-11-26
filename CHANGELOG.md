@@ -2,6 +2,10 @@
 
 Consumer-facing changes are recorded here. Package versions are independent of the template format.
 
+## Unreleased
+
+- Interpret authored paint and image values per target, preserving the original evidence and shared defaults.
+
 ## 1.0.0-rc.2
 
 - Accept UTF-8 template bytes and encoded image bytes from same-origin iframes, including subarrays.

@@ -5,6 +5,7 @@
     "moduleResolution": "NodeNext",
     "lib": ["ES2022", "WebWorker"],
     "strict": true,
+    "resolveJsonModule": true,
     "skipLibCheck": false,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,

@@ -52,6 +52,7 @@ strings replace them. Invalid input returns a failure with no partial output.
 - [Runnable examples](examples/README.md): files and image embedding in Node; live browser preview.
 - [Worker integration](docs/integration.md): coalescing, cancellation, deadlines, and preview cleanup.
 - [API reference](docs/api.md): bindings, inventory, errors, and ownership.
+- [Authored paint and image values](docs/api.md#authored-paint-and-image-values) for editor controls.
 - [Resource limits](docs/resource-policy.md) and [conformance](docs/conformance.md).
 - [Changelog](CHANGELOG.md), [contributing](CONTRIBUTING.md), and [security](SECURITY.md).
 

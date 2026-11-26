@@ -23,3 +23,16 @@ export function inspect(
     } satisfies Template);
   });
 }
+
+export {
+  interpretPaint,
+  interpretImage,
+  defaultInterpretationLimits,
+} from "./interpretation.js";
+export type {
+  PaintInterpretation,
+  ImageInterpretation,
+  InterpretationLimits,
+  InterpretationOptions,
+  SrgbColor,
+} from "./interpretation.js";

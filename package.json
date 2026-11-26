@@ -24,6 +24,7 @@
     "THIRD-PARTY-NOTICES.txt",
     "conformance/SNAPSHOT.json",
     "conformance/manifest.json",
+    "conformance/interpretation/named-colors.json",
     "conformance/LICENSE",
     "CONTRIBUTING.md",
     "examples",

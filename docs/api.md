@@ -31,6 +31,31 @@ strings, not computed CSS or resolved resources.
 key/label/description/order can be `null` for the unnamed section. Grouping does not reorder
 `Template.inputs` or the targets within an input.
 
+## Authored paint and image values
+
+After inspection, pass a single `TemplateTarget` to `interpretPaint(target, options?)` for fill or
+stroke, or `interpretImage(target, options?)` for images. Every result retains the supplied target,
+including its raw XML-processed default and attribute source. The result's `kind` narrows its type.
+
+| Operation | Results                                                                                                                                                                                                                  |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Paint     | `literal` supplies `color.red`, `green`, `blue`, and `alpha` as normalized sRGB components in [0, 1]. Other kinds are `absent`, `no-paint`, `requires-context`, `resource-reference`, and `unsupported-or-unrecognized`. |
+| Image     | `data-uri` supplies `declaredMediaType`, lowercased or `null` if omitted. Other kinds are `absent`, `empty`, `fragment-reference`, `relative-reference`, `absolute-reference`, and `unsupported-or-unrecognized`.        |
+
+For example, a picker can display the same red swatch for `red` and `#f00`. If these spellings
+occur on targets of one shared key, its raw default stays `mixed`. Keep each authored value until
+the user makes an explicit edit. A paint server such as `url(#ink) red` has no literal color result.
+Image interpretation examines reference syntax or the data URI header and leaves the payload opaque.
+A declared media type describes the header only.
+
+Both interpreters are synchronous and independent of inspection and binding. They use the
+[SVT 1.0 interpretation grammar](https://github.com/svt-project/svt-spec/blob/v1.0.0/spec/interpretation.md).
+An unsupported result carries `exceededLimit`, which names the configured limit if one was reached
+and otherwise is `null`. Wrong target kinds throw `TypeError`. Options follow the same positive
+safe-integer convention as inspection and binding. The exported `defaultInterpretationLimits` allow
+4,096 UTF-16 units for paint or ordinary image references, 1,024 for a data URI header including
+its comma, 64 per numeric paint token, and 16 nested paint functions.
+
 ## Binding
 
 ```ts
@@ -86,5 +111,4 @@ unsupported. The DOM never escapes through the public API.
 defaults and enforcement timing. There is no global mutable configuration.
 
 Hosts own files, networks, rendering, queues, cancellation, and deadlines. See
-[Worker integration](integration.md). Optional authored-value interpretation is not implemented;
-inspection retains raw evidence rather than normalizing colors or image references.
+[Worker integration](integration.md).

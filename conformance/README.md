@@ -7,8 +7,8 @@ byte-identical to their source.
 
 The authoritative [fixture convention](https://github.com/svt-project/svt-spec/blob/8682a284a87669a744753be80d8a0277ac90dc39/conformance/README.md)
 defines expected observations. [Implementation validation](../docs/conformance.md) describes how
-our runner projects the TypeScript API and compares XML. Inspection and substitution are active;
-optional interpretation cases and named colors are retained but not executed.
+our runner projects the TypeScript API and compares XML. Node and dedicated Workers also execute the optional
+interpretation cases and check every named color.
 
 Do not fetch live assets during a build, edit expected data to match this implementation, or change
 its recorded origin. Adoption of a new snapshot requires an explicit source,
