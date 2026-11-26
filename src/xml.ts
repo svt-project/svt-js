@@ -5,6 +5,7 @@ import {
   XMLSerializer,
   onErrorStopParsing,
 } from "@xmldom/xmldom";
+import { __DOMHandler as XmlDomHandler } from "@xmldom/xmldom/lib/dom-parser.js";
 import type { Node, Element, Document } from "@xmldom/xmldom";
 import type { InspectionLimits } from "./model.js";
 import { bytes, limit, reject } from "./policy.js";
@@ -41,6 +42,18 @@ export function text(node: Node): string {
     if (c.nodeType === 3 || c.nodeType === 4) parts.push(c.nodeValue ?? "");
   return parts.join("");
 }
+// xmldom skips zero-length character events, including authored CDATA sections.
+// Preserve those nodes so text substitution can use their position among siblings.
+class SvtDomHandler extends XmlDomHandler {
+  override characters(chars: string, start: number, length: number): void {
+    if (this.cdata && length === 0 && this.currentElement) {
+      this.currentElement.appendChild(this.doc.createCDATASection(""));
+      return;
+    }
+    super.characters(chars, start, length);
+  }
+}
+
 export function parse(
   source: string | Uint8Array,
   limits: InspectionLimits,
@@ -64,6 +77,7 @@ export function parse(
   try {
     doc = new DOMParser({
       locator: false,
+      domHandler: SvtDomHandler,
       // Warnings can describe conforming content (for example a literal U+FFFD).
       // Let the processor classify XML failures; errors and fatal errors stop parsing.
       onError: onErrorStopParsing,

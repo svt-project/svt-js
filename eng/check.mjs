@@ -27,7 +27,8 @@ for (const [command, args] of [
       "tsconfig.json",
     ],
   ],
-  ["node", ["node_modules/typescript/bin/tsc", "-p", "tsconfig.json"]],
+  // Exercise the normal npm lifecycle before any other step builds dist.
+  ["node", ["eng/package.mjs"]],
   [
     "node",
     ["node_modules/typescript/bin/tsc", "-p", "test/types/tsconfig.json"],
@@ -35,7 +36,6 @@ for (const [command, args] of [
   ["node", ["eng/coverage.mjs"]],
   ["python3", ["eng/independent.py"]],
   ["node", ["eng/examples.mjs"]],
-  ["node", ["eng/package.mjs"]],
 ]) {
   console.log("> " + command + " " + args.join(" "));
   execFileSync(command, args, { cwd: root, stdio: "inherit" });
