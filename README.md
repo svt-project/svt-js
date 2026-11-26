@@ -8,7 +8,8 @@ Inspect named inputs in SVG artwork and bind text, paint, or images. The same sy
 runs in Node, browsers, and Workers. SVG keeps control of layout and rendering.
 
 The package name is **`@svt-project/svt-js`**. Include the scope in imports and dependencies;
-`svt-js` is a different npm package. npm publication is pending. To try this checkout:
+`svt-js` is a different npm package. Install the published candidate with `npm install @svt-project/svt-js@rc`.
+To try the example from this checkout:
 
 ```sh
 npm ci --ignore-scripts

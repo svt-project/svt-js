@@ -82,13 +82,21 @@ export function options<T extends object>(
   }
   return Object.freeze(result);
 }
+// The intrinsic typed-array brand works across browser realms and distinguishes byte view types.
+const typedArrayPrototype = Object.getPrototypeOf(Uint8Array.prototype);
+function isUint8Array(value: unknown): value is Uint8Array {
+  return (
+    ArrayBuffer.isView(value) &&
+    Reflect.get(typedArrayPrototype, Symbol.toStringTag, value) === "Uint8Array"
+  );
+}
 export function bytes(value: unknown, name: string): Uint8Array {
-  if (!(value instanceof Uint8Array))
+  if (!isUint8Array(value))
     throw new TypeError(`${name} must be a Uint8Array.`);
   if (Object.prototype.toString.call(value.buffer) !== "[object ArrayBuffer]")
     throw new TypeError(`${name} must not use shared memory.`);
-  // Accessing a detached view via slice fails; callers must not mutate buffers during an operation.
-  return value;
+  // A local view preserves subarray boundaries and gives callers standard byte-copy semantics.
+  return new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
 }
 export function string(value: unknown, name: string): string {
   if (typeof value !== "string")

@@ -31,6 +31,12 @@ await build({
     JSON.stringify(r.metafile, null, 2),
   ),
 );
+const iframeBundle = await build({
+  entryPoints: ["test/iframe.mjs"],
+  bundle: true,
+  format: "esm",
+  write: false,
+});
 const server = http.createServer((req, res) => {
   res.setHeader("Cache-Control", "no-store");
   if (req.url === "/") {
@@ -38,6 +44,11 @@ const server = http.createServer((req, res) => {
     res.end(
       '<!doctype html><title>SVT Worker validation</title><script>const w=new Worker("/worker.js",{type:"module"});w.onmessage=e=>{window.result=e.data;w.terminate()};w.onerror=e=>{window.failure=e.message;w.terminate()};</script>',
     );
+    return;
+  }
+  if (req.url === "/iframe.js") {
+    res.setHeader("Content-Type", "text/javascript");
+    res.end(iframeBundle.outputFiles[0].contents);
     return;
   }
   if (req.url === "/worker.js") {
@@ -67,7 +78,11 @@ try {
     origin = "http://127.0.0.1:" + server.address().port,
     unexpected = [];
   await context.route("**/*", async (route) => {
-    if ([origin + "/", origin + "/worker.js"].includes(route.request().url()))
+    if (
+      [origin + "/", origin + "/worker.js", origin + "/iframe.js"].includes(
+        route.request().url(),
+      )
+    )
       await route.continue();
     else {
       unexpected.push(route.request().url());
@@ -76,6 +91,10 @@ try {
   });
   const page = await context.newPage();
   await page.goto(origin);
+  await page.evaluate(async () =>
+    (await import("/iframe.js")).checkIframeBytes(),
+  );
+  console.log("Iframe template inspection and image byte binding passed.");
   await page.waitForFunction(
     () => window.result || window.failure,
     {},
