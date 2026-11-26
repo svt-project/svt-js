@@ -4,7 +4,8 @@ Discuss public API, parser dependency, format and ownership changes before imple
 inspection/binding independent of rendering, resource acquisition and Worker lifecycle. Work
 serially unless delegation is explicitly agreed. Use American English.
 
-Use Node 24 and Python 3. Install locked dependencies without lifecycle scripts:
+Use Node 24 or 26 and Python 3. CI runs the full Node checks on both versions. Node 24 is the
+minimum supported runtime. Install locked dependencies without lifecycle scripts:
 
 ```sh
 npm ci --ignore-scripts
