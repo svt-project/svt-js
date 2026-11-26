@@ -13,7 +13,7 @@ mkdirSync("artifacts", { recursive: true });
 const [pack] = JSON.parse(
   npm([
     "pack",
-    "--ignore-scripts",
+    "--foreground-scripts=false",
     "--json",
     "--pack-destination",
     "artifacts",

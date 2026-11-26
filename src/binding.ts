@@ -19,6 +19,7 @@ interface Prepared {
   input: InternalInput;
   value: string | Uint8Array;
   mediaType: string | null;
+  emittedBytes: number;
 }
 /** UTF-8 length of emitted character data or attribute content under the selected serializer. */
 function escapedLength(value: string, attribute: boolean): number {
@@ -137,7 +138,7 @@ export function bind(
         // Existing XLink href duplicates the new unnamespaced href; captured inventory records origin
         // but both attributes may exist. Count duplicates from the captured elements below.
       }
-      prepared.push({ input, value, mediaType });
+      prepared.push({ input, value, mediaType, emittedBytes: emitted });
     }
     // Map only requested targets before cloning; account for duplicate href output using source DOM.
     const operations = new Map<
@@ -164,15 +165,9 @@ export function bind(
           operation.hook === "image" &&
           element.hasAttributeNS(XLINK, "href")
         ) {
-          const p = operation.prepared;
-          const size =
-            typeof p.value === "string"
-              ? escapedLength(p.value, true)
-              : escapedLength("data:" + p.mediaType + ";base64,", true) +
-                4 * Math.ceil(p.value.byteLength / 3);
           expansion = addWithin(
             expansion,
-            size,
+            operation.prepared.emittedBytes,
             limits.maxOutputBytes,
             "maxOutputBytes",
           );

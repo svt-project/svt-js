@@ -154,13 +154,17 @@ test("example disposal releases the Worker and refuses further updates", (t) => 
   assert.throws(() => controller.update([]), /disposed/);
 });
 
-test("Node example embeds the image and updates shared paint targets", () => {
+test("Node example embeds the image and updates shared heading and paint targets", () => {
   const output = "artifacts/examples/test-invitation.svg";
   execFileSync(process.execPath, ["examples/node/bind.mjs", output]);
   const result = inspect(readFileSync(output));
   assert.equal(result.ok, true);
   const byKey = Object.fromEntries(
     result.value.inputs.map((input) => [input.key, input]),
+  );
+  assert.deepEqual(
+    byKey.heading.targets.map((target) => target.elementName),
+    ["title", "text"],
   );
   assert.equal(byKey.heading.default.raw, "Trail photography");
   assert.equal(byKey.accent.targets.length, 2);

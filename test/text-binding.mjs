@@ -34,6 +34,7 @@ export function textPositions() {
       "<!--only--><?p only?>new",
       "<!--only--><?p only?>",
     ],
+    ["<![CDATA[]]><!--keep-->tail", "new<!--keep-->", "<!--keep-->"],
     ["", "new", ""],
   ]) {
     const source = svg(`<text data-svt-text="a">${before}</text>`);

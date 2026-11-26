@@ -255,8 +255,8 @@ export function inventory(root: Element, limits: InspectionLimits): Inventory {
         invalid("Empty key or incompatible binding target.", key);
       const kind = hook === "fill" || hook === "stroke" ? "paint" : hook;
       let b = bindings.get(key);
-      if (b && (b.input.kind !== kind || kind !== "paint"))
-        invalid("Conflicting input identity.", key);
+      if (b && b.input.kind !== kind)
+        invalid("Conflicting input kinds for the same key.", key);
       if (!b) {
         const label = trim(attr(e, "data-svt-label"));
         b = {

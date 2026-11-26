@@ -1,11 +1,11 @@
 # Accepted conformance assets
 
 These files are explicitly copied from the reviewed specification candidate identified in
-[SNAPSHOT.json](SNAPSHOT.json). [manifest.json](manifest.json) verifies all 59 canonical data/license
+[SNAPSHOT.json](SNAPSHOT.json). [manifest.json](manifest.json) verifies the canonical data and license
 files. This guide and the snapshot stamp are implementation-owned; the canonical files remain
 byte-identical to their source.
 
-The authoritative [fixture convention](https://github.com/svt-project/svt-spec/blob/21e677727545dc3d9fe30511fbddc93ca023851e/conformance/README.md)
+The authoritative [fixture convention](https://github.com/svt-project/svt-spec/blob/10f7f1edb7aec76d4ab5b964491db61f05aafa1f/conformance/README.md)
 defines expected observations. [Implementation validation](../docs/conformance.md) describes how
 our runner projects the TypeScript API and compares XML. Inspection and substitution are active;
 optional interpretation cases and named colors are retained but not executed.

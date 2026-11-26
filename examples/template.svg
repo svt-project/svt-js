@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="320" viewBox="0 0 640 320" data-svt-version="1.0">
+  <title data-svt-text="heading" data-svt-label="Heading">Make it yours</title>
   <rect width="640" height="320" rx="20" fill="#f4f7f5"/>
   <rect x="24" y="24" width="8" height="272" rx="4" fill="#007b67" data-svt-fill="accent" data-svt-label="Accent color"/>
-  <text x="56" y="92" font-family="sans-serif" font-size="34" fill="#173b45" data-svt-text="heading" data-svt-label="Heading">Make it yours</text>
+  <text x="56" y="92" font-family="sans-serif" font-size="34" fill="#173b45" data-svt-text="heading">Make it yours</text>
   <text x="56" y="136" font-family="sans-serif" font-size="18" fill="#526970">One template, many variations.</text>
   <path d="M56 170H330" stroke="#007b67" stroke-width="4" data-svt-stroke="accent"/>
   <image x="400" y="180" width="200" height="100" data-svt-image="artwork" data-svt-label="Artwork"/>

@@ -31,8 +31,9 @@ jobs:
           path: artifacts/coverage/
           if-no-files-found: error
           retention-days: 14
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium firefox
       - run: npm run test:browser
+      - run: npm run test:browser -- firefox
       - run: npm run test:examples
   coverage:
     if: ${{ vars.CODECOV_ENABLED == 'true' }}
