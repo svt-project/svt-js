@@ -1,9 +1,9 @@
 # Conformance and validation
 
 This implementation accepts template format `1.0` and implements the inspection and substitution
-profiles. Cases exercise input discovery, per-target defaults and substitution, including repeated
-text, image, and paint keys. Optional authored paint/image interpretation is not implemented; its
-reference files are retained without claiming conformance.
+profiles and the optional per-target interpretation profile. Cases exercise input discovery, per-target defaults and substitution, including repeated
+text, image, and paint keys. The Node and browser Worker suites exercise the stamped paint and image
+interpretation cases and the full named-color table.
 
 [SNAPSHOT.json](../conformance/SNAPSHOT.json) records the explicitly accepted specification revision
 and the hash of its complete reference set. Builds use the embedded files from that edition.

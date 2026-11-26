@@ -1,5 +1,7 @@
 import {
   inspect,
+  interpretPaint,
+  interpretImage,
   type Binding,
   type Result,
   type Template,
@@ -26,6 +28,21 @@ if (inspected.ok) {
     void bytes;
   }
   for (const input of inspected.value.inputs) {
+    for (const target of input.targets) {
+      if (target.hook === "image") {
+        const result = interpretImage(target);
+        if (result.kind === "data-uri") {
+          const media: string | null = result.declaredMediaType;
+          void media;
+        }
+      } else if (target.hook === "fill" || target.hook === "stroke") {
+        const result = interpretPaint(target);
+        if (result.kind === "literal") {
+          const alpha: number = result.color.alpha;
+          void alpha;
+        }
+      }
+    }
     if (input.default.state === "common") {
       const value: string = input.default.raw;
       void value;

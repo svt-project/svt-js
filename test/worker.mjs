@@ -3,6 +3,7 @@ import { canonical, svg, success, equal, semantics } from "./support.mjs";
 import fixtures from "../artifacts/fixtures.json";
 import { replacementCharacter } from "./xml-preservation.mjs";
 import { fragmentedText, textPositions } from "./text-binding.mjs";
+import { interpretationCases } from "./interpretation-cases.mjs";
 const result = canonical(fixtures);
 const check = (name, run) => {
   try {
@@ -12,6 +13,7 @@ const check = (name, run) => {
     result.results.push({ name, ok: false, error: String(e) });
   }
 };
+check("Authored paint and image interpretation profile", interpretationCases);
 check("Worker globals", () => {
   for (const name of ["DOMParser", "document", "Buffer", "process"])
     equal(typeof globalThis[name], "undefined");
